@@ -230,3 +230,48 @@ body, html, #root {
   background: linear-gradient(90deg, #ffb347 0%, #ff5e62 100%);
   box-shadow: 0 4px 32px #ff5e62cc, 0 2px 8px #0008;
 }
+
+.modern-live-btn {
+  background: linear-gradient(90deg, #9147ff 0%, #ff5e62 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.4rem 1.2rem;
+  margin-left: 0.5rem;
+  box-shadow: 0 1px 8px #9147ff40;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.modern-live-btn:hover, .modern-live-btn:focus {
+  background: linear-gradient(90deg, #ff5e62 0%, #9147ff 100%);
+  box-shadow: 0 2px 16px #9147ff80;
+}
+
+.modern-live-iframe-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.modern-live-iframe {
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 24px #9147ff80, 0 1px 4px #0008;
+  width: 100%;
+  max-width: 320px;
+  min-height: 200px;
+  background: #18181b;
+}
+
+.modern-live-label {
+  color: #9147ff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 0.7rem;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 8px #9147ff40;
+}
