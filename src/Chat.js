@@ -10,6 +10,7 @@ function getTimeString(date) {
 
 export default function Chat({ onClose }) {
   const [username, setUsername] = useState(() => localStorage.getItem("chat_username") || "");
+  const [isLogged, setIsLogged] = useState(!!localStorage.getItem("chat_username"));
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,6 +51,7 @@ export default function Chat({ onClose }) {
     e.preventDefault();
     if (username.trim()) {
       localStorage.setItem("chat_username", username);
+      setIsLogged(true);
     }
   }
 
@@ -64,7 +66,7 @@ export default function Chat({ onClose }) {
       <div className="chat-modal">
         <button className="chat-close-btn" onClick={onClose}>×</button>
         <div className="chat-title">Chat ao Vivo</div>
-        {!localStorage.getItem("chat_username") ? (
+        {!isLogged ? (
           <form className="chat-username-form" onSubmit={handleSetUsername}>
             <input
               className="chat-username-input"
