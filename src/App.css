@@ -66,11 +66,13 @@ body, html, #root {
 
 .modern-title {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
   letter-spacing: 0.02em;
   margin-bottom: 0.3rem;
+  margin-top: 2.2rem;
   text-shadow: 0 2px 8px #ff5e62cc;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .modern-artist {
