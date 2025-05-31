@@ -205,7 +205,7 @@ function App() {
         <div style={{ display: 'none' }}>
           <YouTube
             videoId={playlist[current].videoId}
-            opts={{ playerVars: { autoplay: 0, mute: 1 } }}
+            opts={{ playerVars: { autoplay: 1, mute: 1 } }}
             onReady={onReady}
             onEnd={onEnd}
           />
