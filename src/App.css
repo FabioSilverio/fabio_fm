@@ -1,0 +1,305 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #282c34;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ipod-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ipod-body {
+  background: #f8f8f8;
+  border-radius: 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  width: 320px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 0 24px 0;
+  border: 4px solid #e0e0e0;
+}
+
+.ipod-screen {
+  background: #222;
+  color: #fff;
+  border-radius: 18px;
+  width: 260px;
+  height: 100px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.song-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.song-artist {
+  font-size: 1rem;
+  color: #b0b0b0;
+}
+
+.ipod-wheel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.ipod-btn {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  transition: background 0.2s, border 0.2s;
+}
+
+.ipod-btn:hover {
+  background: #e0e0e0;
+  border: 2px solid #888;
+}
+
+/* Corpo do iPod */
+.ipod-classic {
+  background: linear-gradient(180deg, #444 0%, #222 100%);
+  border-radius: 40px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  width: 320px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 4px solid #111;
+  padding-top: 32px;
+  position: relative;
+}
+
+/* Tela do iPod */
+.ipod-screen-classic {
+  background: #eaeaea;
+  border-radius: 16px;
+  width: 260px;
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.ipod-menu {
+  background: #fff;
+  width: 120px;
+  height: 100%;
+  padding: 8px 0 8px 8px;
+  border-right: 2px solid #d0d0d0;
+  display: flex;
+  flex-direction: column;
+}
+.ipod-menu-title {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 4px;
+}
+.ipod-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ipod-menu-list li {
+  font-size: 0.95rem;
+  color: #222;
+  padding: 2px 0 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+.ipod-menu-list li.selected {
+  background: #0078d7;
+  color: #fff;
+}
+
+.ipod-cover-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+}
+.ipod-cover {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* Info da música */
+.ipod-song-info {
+  margin-top: 8px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.ipod-song-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+}
+.ipod-song-artist {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+}
+
+/* Click wheel */
+.ipod-wheel-classic {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle at 60% 40%, #eee 60%, #bbb 100%);
+  border-radius: 50%;
+  margin-top: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ipod-wheel-menu {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #444;
+  letter-spacing: 2px;
+}
+.ipod-wheel-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #444;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+.ipod-wheel-btn.left {
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ipod-wheel-btn.right {
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ipod-wheel-btn.bottom {
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+}
+.ipod-wheel-btn:active {
+  color: #0078d7;
+}
+.ipod-wheel-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  border: 2px solid #bbb;
+}
+
+/* Overlay para autoplay */
+.ipod-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 20, 20, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.ipod-overlay-btn {
+  background: #0078d7;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.ipod-overlay-btn:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+.ipod-overlay-btn:hover:not(:disabled) {
+  background: #005fa3;
+}
