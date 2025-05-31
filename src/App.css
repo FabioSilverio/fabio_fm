@@ -37,7 +37,7 @@ body, html, #root {
   background: radial-gradient(circle, #ffb347 0%, #ff5e62 60%, #ff0000 100%);
   border-radius: 1.5rem;
   padding: 0.2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4.2rem;
   box-shadow: 0 0 32px 8px #ff5e62, 0 0 0 6px #fff2, 0 0 0 0 #fff0;
   display: flex;
   align-items: center;
@@ -85,9 +85,9 @@ body, html, #root {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 2.2rem;
+  gap: 2.8rem;
   margin-bottom: 1.2rem;
-  margin-top: 2rem;
+  margin-top: 2.8rem;
 }
 
 .modern-btn {
