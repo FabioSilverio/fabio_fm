@@ -298,6 +298,8 @@ body, html, #root {
   align-items: center;
   justify-content: center;
   transition: box-shadow 0.2s, background 0.2s, transform 0.2s;
+  z-index: 9999 !important;
+  outline: 3px solid #fff5;
 }
 .chat-fab:hover, .chat-fab:focus {
   background: linear-gradient(90deg, #9147ff 0%, #ff5e62 100%);
