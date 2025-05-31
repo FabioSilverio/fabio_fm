@@ -26,6 +26,7 @@ function App() {
   const [ready, setReady] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
+  const [showOverlay, setShowOverlay] = useState(true);
   const playerRef = useRef(null);
 
   useEffect(() => {
@@ -74,11 +75,11 @@ function App() {
   }, [selectedPlaylist]);
 
   useEffect(() => {
-    if (playerRef.current && playerRef.current.internalPlayer) {
+    if (playerRef.current && playerRef.current.internalPlayer && !showOverlay) {
       playerRef.current.internalPlayer.unMute();
       playerRef.current.internalPlayer.playVideo();
     }
-  }, [current]);
+  }, [current, showOverlay]);
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % playlist.length);
@@ -101,8 +102,10 @@ function App() {
   const onReady = (event) => {
     playerRef.current = event.target;
     setReady(true);
-    event.target.unMute();
-    event.target.playVideo();
+    if (!showOverlay) {
+      event.target.unMute();
+      event.target.playVideo();
+    }
   };
 
   const onEnd = () => {
@@ -138,6 +141,13 @@ function App() {
 
   return (
     <div className="modern-bg">
+      {showOverlay && (
+        <div className="modern-overlay">
+          <button className="modern-overlay-btn" onClick={() => { setShowOverlay(false); setPlaying(true); }} disabled={!ready}>
+            Clique para ouvir
+          </button>
+        </div>
+      )}
       <div className="modern-card">
         <div className="modern-cover-glow">
           <img className="modern-cover" src={playlist[current].cover} alt="Album cover" />
