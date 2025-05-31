@@ -170,6 +170,8 @@ function App() {
           </button>
           <div className="modern-date">
             {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+            {' • '}
+            {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
           </div>
         </div>
         {showLive ? (
