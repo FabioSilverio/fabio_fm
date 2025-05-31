@@ -112,6 +112,9 @@ function App() {
     setPlaying(true);
   };
 
+  const onPlayerPlay = () => setPlaying(true);
+  const onPlayerPause = () => setPlaying(false);
+
   const handlePausePlay = () => {
     if (!playerRef.current || !playerRef.current.internalPlayer) return;
     if (playing) {
@@ -120,7 +123,6 @@ function App() {
       playerRef.current.internalPlayer.unMute();
       playerRef.current.internalPlayer.playVideo();
     }
-    setPlaying((p) => !p);
   };
 
   const fadeInVolume = (player, duration = 2000) => {
@@ -245,6 +247,8 @@ function App() {
             opts={{ playerVars: { autoplay: 1, mute: 0 } }}
             onReady={onReady}
             onEnd={onEnd}
+            onPlay={onPlayerPlay}
+            onPause={onPlayerPause}
           />
         </div>
       </div>
