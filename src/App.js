@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import './App.css';
+import Chat from './Chat';
 
 const PLAYLISTS = [
   { name: 'Rock', id: 'PLSJkIg_k31H-il-rxsoqqepcvZqAiPpUv' },
@@ -28,6 +29,7 @@ function App() {
   const [errorMsg, setErrorMsg] = useState('');
   const [showOverlay, setShowOverlay] = useState(true);
   const [showLive, setShowLive] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const playerRef = useRef(null);
 
   useEffect(() => {
@@ -141,82 +143,86 @@ function App() {
   }
 
   return (
-    <div className="modern-bg">
-      {showOverlay && (
-        <div className="modern-overlay">
-          <button className="modern-overlay-btn" onClick={() => { setShowOverlay(false); setPlaying(true); }} disabled={!ready}>
-            Clique para ouvir
-          </button>
-        </div>
-      )}
-      <div className="modern-card">
-        <div className="modern-extra">
-          <select
-            className="modern-select"
-            value={selectedPlaylist}
-            onChange={e => setSelectedPlaylist(e.target.value)}
-            disabled={showLive}
-          >
-            {PLAYLISTS.map(pl => (
-              <option key={pl.id} value={pl.id}>{pl.name}</option>
-            ))}
-          </select>
-          <button
-            className="modern-live-btn"
-            onClick={() => setShowLive((v) => !v)}
-            style={{ marginLeft: 8 }}
-          >
-            {showLive ? 'Voltar' : 'AO VIVO'}
-          </button>
-          <div className="modern-date">
-            {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
-            {' • '}
-            {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+    <>
+      {showChat && <Chat onClose={() => setShowChat(false)} />}
+      <div className="modern-bg">
+        {showOverlay && (
+          <div className="modern-overlay">
+            <button className="modern-overlay-btn" onClick={() => { setShowOverlay(false); setPlaying(true); }} disabled={!ready}>
+              Clique para ouvir
+            </button>
           </div>
-        </div>
-        {showLive ? (
-          <div className="modern-live-iframe-container">
-            <iframe
-              src="https://player.twitch.tv/?channel=fagulhu&parent=localhost&parent=fabiofm.vercel.app"
-              height="300"
-              width="100%"
-              allowFullScreen
-              frameBorder="0"
-              title="Twitch Live"
-              className="modern-live-iframe"
-            ></iframe>
-            <div className="modern-live-label">AO VIVO - Twitch.tv/fagulhu</div>
-          </div>
-        ) : (
-          <>
-            <div className="modern-cover-glow">
-              <img className="modern-cover" src={playlist[current].cover} alt="Album cover" />
-            </div>
-            <div className="modern-info">
-              <div className="modern-title">{playlist[current].title}</div>
-              <div className="modern-artist">{playlist[current].artist}</div>
-            </div>
-            <div className="modern-controls">
-              <button className="modern-btn" onClick={handlePrev} title="Anterior">⏮️</button>
-              <button className="modern-btn play" onClick={handlePausePlay} title="Play/Pause">
-                {playing ? '⏸️' : '▶️'}
-              </button>
-              <button className="modern-btn" onClick={handleNext} title="Próxima">⏭️</button>
-            </div>
-            <div style={{ display: 'none' }}>
-              <YouTube
-                videoId={playlist[current].videoId}
-                opts={{ playerVars: { autoplay: 1, mute: 0 } }}
-                onReady={onReady}
-                onEnd={onEnd}
-                onPlay={onPlayerPlay}
-                onPause={onPlayerPause}
-              />
-            </div>
-          </>
         )}
+        <div className="modern-card">
+          <div className="modern-extra">
+            <select
+              className="modern-select"
+              value={selectedPlaylist}
+              onChange={e => setSelectedPlaylist(e.target.value)}
+              disabled={showLive}
+            >
+              {PLAYLISTS.map(pl => (
+                <option key={pl.id} value={pl.id}>{pl.name}</option>
+              ))}
+            </select>
+            <button
+              className="modern-live-btn"
+              onClick={() => setShowLive((v) => !v)}
+              style={{ marginLeft: 8 }}
+            >
+              {showLive ? 'Voltar' : 'AO VIVO'}
+            </button>
+            <div className="modern-date">
+              {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+              {' • '}
+              {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+            </div>
+          </div>
+          {showLive ? (
+            <div className="modern-live-iframe-container">
+              <iframe
+                src="https://player.twitch.tv/?channel=fagulhu&parent=localhost&parent=fabiofm.vercel.app"
+                height="300"
+                width="100%"
+                allowFullScreen
+                frameBorder="0"
+                title="Twitch Live"
+                className="modern-live-iframe"
+              ></iframe>
+              <div className="modern-live-label">AO VIVO - Twitch.tv/fagulhu</div>
+            </div>
+          ) : (
+            <>
+              <div className="modern-cover-glow">
+                <img className="modern-cover" src={playlist[current].cover} alt="Album cover" />
+              </div>
+              <div className="modern-info">
+                <div className="modern-title">{playlist[current].title}</div>
+                <div className="modern-artist">{playlist[current].artist}</div>
+              </div>
+              <div className="modern-controls">
+                <button className="modern-btn" onClick={handlePrev} title="Anterior">⏮️</button>
+                <button className="modern-btn play" onClick={handlePausePlay} title="Play/Pause">
+                  {playing ? '⏸️' : '▶️'}
+                </button>
+                <button className="modern-btn" onClick={handleNext} title="Próxima">⏭️</button>
+              </div>
+              <div style={{ display: 'none' }}>
+                <YouTube
+                  videoId={playlist[current].videoId}
+                  opts={{ playerVars: { autoplay: 1, mute: 0 } }}
+                  onReady={onReady}
+                  onEnd={onEnd}
+                  onPlay={onPlayerPlay}
+                  onPause={onPlayerPause}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+      <button className="chat-fab" onClick={() => setShowChat(true)} title="Abrir chat">💬</button>
+    </>
   );
 }
 
