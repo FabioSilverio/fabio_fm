@@ -36,9 +36,9 @@ body, html, #root {
 .modern-cover-glow {
   background: radial-gradient(circle, #ffb347 0%, #ff5e62 60%, #ff0000 100%);
   border-radius: 1.5rem;
-  padding: 0.5rem;
-  margin-bottom: 2.2rem;
-  box-shadow: 0 0 40px 10px #ff5e62, 0 0 0 8px #fff2, 0 0 0 0 #fff0;
+  padding: 0.2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 0 32px 8px #ff5e62, 0 0 0 6px #fff2, 0 0 0 0 #fff0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@ body, html, #root {
   justify-content: center;
   gap: 2.2rem;
   margin-bottom: 1.2rem;
-  margin-top: 1.2rem;
+  margin-top: 2rem;
 }
 
 .modern-btn {
