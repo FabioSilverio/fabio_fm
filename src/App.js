@@ -90,6 +90,13 @@ function App() {
     fetchPlaylist();
   }, [selectedPlaylist]);
 
+  useEffect(() => {
+    if (playerRef.current && playerRef.current.internalPlayer) {
+      playerRef.current.internalPlayer.unMute();
+      playerRef.current.internalPlayer.playVideo();
+    }
+  }, [current]);
+
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % playlist.length);
     setPlaying(true);
@@ -135,6 +142,8 @@ function App() {
   const onReady = (event) => {
     playerRef.current = event.target;
     setReady(true);
+    event.target.unMute();
+    event.target.playVideo();
   };
 
   const onEnd = () => {
