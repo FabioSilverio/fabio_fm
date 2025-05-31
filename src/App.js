@@ -92,10 +92,14 @@ function App() {
 
   useEffect(() => {
     if (playerRef.current && playerRef.current.internalPlayer) {
-      playerRef.current.internalPlayer.unMute();
-      playerRef.current.internalPlayer.playVideo();
+      if (playing) {
+        playerRef.current.internalPlayer.playVideo();
+        playerRef.current.internalPlayer.unMute();
+      } else {
+        playerRef.current.internalPlayer.pauseVideo();
+      }
     }
-  }, [current]);
+  }, [current, playing]);
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % playlist.length);
@@ -103,13 +107,6 @@ function App() {
   };
 
   const handlePausePlay = () => {
-    if (!playerRef.current || !playerRef.current.internalPlayer) return;
-    if (playing) {
-      playerRef.current.internalPlayer.pauseVideo();
-    } else {
-      playerRef.current.internalPlayer.unMute();
-      playerRef.current.internalPlayer.playVideo();
-    }
     setPlaying((p) => !p);
   };
 
@@ -142,8 +139,10 @@ function App() {
   const onReady = (event) => {
     playerRef.current = event.target;
     setReady(true);
-    event.target.unMute();
-    event.target.playVideo();
+    if (playing) {
+      event.target.unMute();
+      event.target.playVideo();
+    }
   };
 
   const onEnd = () => {
@@ -229,9 +228,8 @@ function App() {
         </div>
         <div style={{ display: 'none' }}>
           <YouTube
-            key={playlist[current].videoId}
             videoId={playlist[current].videoId}
-            opts={{ playerVars: { autoplay: 1, mute: 1 } }}
+            opts={{ playerVars: { autoplay: 1, mute: 0 } }}
             onReady={onReady}
             onEnd={onEnd}
           />
