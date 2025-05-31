@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import './App.css';
 
-const PLAYLIST_ID = 'PLpY7hx7jry7yO2su3JjgsaPdp2-bZGPth';
+const PLAYLISTS = [
+  { name: 'Rock', id: 'PLpY7hx7jry7yO2su3JjgsaPdp2-bZGPth' },
+  { name: 'Pop', id: 'PLDIoUOhQQPlXqz5QZ3dx-lh_p6RcPeKjv' },
+  { name: 'Jazz', id: 'PLiy0XOfUv4hFHmPs0a8RqkDzfT-2nw7WV' },
+];
 const API_KEY = 'AIzaSyCy5n1tNOT4Cf_qEKE3hiOpWYNhPQVmX1w';
 
 const menuItems = [
@@ -17,6 +21,7 @@ const menuItems = [
 ];
 
 function App() {
+  const [selectedPlaylist, setSelectedPlaylist] = useState(PLAYLISTS[0].id);
   const [playlist, setPlaylist] = useState([]);
   const [current, setCurrent] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -36,7 +41,7 @@ function App() {
       try {
         do {
           const res = await fetch(
-            `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${PLAYLIST_ID}&key=${API_KEY}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`
+            `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${selectedPlaylist}&key=${API_KEY}${nextPageToken ? `&pageToken=${nextPageToken}` : ''}`
           );
           if (!res.ok) {
             throw new Error('Erro de rede: ' + res.status);
@@ -71,6 +76,7 @@ function App() {
           cover: item.snippet.thumbnails?.medium?.url || '',
         }));
         setPlaylist(formatted);
+        setCurrent(0); // Volta para a primeira música ao trocar de playlist
       } catch (e) {
         setPlaylist([]);
         setLoading(false);
@@ -82,7 +88,7 @@ function App() {
       setLoading(false);
     }
     fetchPlaylist();
-  }, []);
+  }, [selectedPlaylist]);
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % playlist.length);
@@ -170,6 +176,16 @@ function App() {
 
   return (
     <div className="App">
+      {/* Seletor de playlists */}
+      <select
+        value={selectedPlaylist}
+        onChange={e => setSelectedPlaylist(e.target.value)}
+        style={{ marginBottom: 16, fontSize: '1rem' }}
+      >
+        {PLAYLISTS.map(pl => (
+          <option key={pl.id} value={pl.id}>{pl.name}</option>
+        ))}
+      </select>
       {showOverlay && (
         <div className="ipod-overlay">
           <button className="ipod-overlay-btn" onClick={handleStart} disabled={!ready}>
