@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 import './App.css';
 
 const PLAYLISTS = [
-  { name: 'Rock', id: 'PLpY7hx7jry7yO2su3JjgsaPdp2-bZGPth' },
+  { name: 'Rock', id: 'PLSJkIg_k31H-il-rxsoqqepcvZqAiPpUv' },
   { name: 'Pop', id: 'PLDIoUOhQQPlXqz5QZ3dx-lh_p6RcPeKjv' },
   { name: 'Jazz', id: 'PLiy0XOfUv4hFHmPs0a8RqkDzfT-2nw7WV' },
 ];
@@ -19,6 +19,16 @@ const menuItems = [
   'Shuffle Songs',
   'Now Playing',
 ];
+
+// Função para embaralhar arrays
+function shuffleArray(array) {
+  const arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 function App() {
   const [selectedPlaylist, setSelectedPlaylist] = useState(PLAYLISTS[0].id);
@@ -75,7 +85,7 @@ function App() {
           artist: item.snippet.videoOwnerChannelTitle || item.snippet.channelTitle,
           cover: item.snippet.thumbnails?.medium?.url || '',
         }));
-        setPlaylist(formatted);
+        setPlaylist(shuffleArray(formatted));
         setCurrent(0); // Volta para a primeira música ao trocar de playlist
       } catch (e) {
         setPlaylist([]);
@@ -92,14 +102,10 @@ function App() {
 
   useEffect(() => {
     if (playerRef.current && playerRef.current.internalPlayer) {
-      if (playing) {
-        playerRef.current.internalPlayer.playVideo();
-        playerRef.current.internalPlayer.unMute();
-      } else {
-        playerRef.current.internalPlayer.pauseVideo();
-      }
+      playerRef.current.internalPlayer.unMute();
+      playerRef.current.internalPlayer.playVideo();
     }
-  }, [current, playing]);
+  }, [current]);
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % playlist.length);
@@ -107,6 +113,13 @@ function App() {
   };
 
   const handlePausePlay = () => {
+    if (!playerRef.current || !playerRef.current.internalPlayer) return;
+    if (playing) {
+      playerRef.current.internalPlayer.pauseVideo();
+    } else {
+      playerRef.current.internalPlayer.unMute();
+      playerRef.current.internalPlayer.playVideo();
+    }
     setPlaying((p) => !p);
   };
 
