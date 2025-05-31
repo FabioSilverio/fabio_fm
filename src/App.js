@@ -229,6 +229,7 @@ function App() {
         </div>
         <div style={{ display: 'none' }}>
           <YouTube
+            key={playlist[current].videoId}
             videoId={playlist[current].videoId}
             opts={{ playerVars: { autoplay: 1, mute: 1 } }}
             onReady={onReady}
